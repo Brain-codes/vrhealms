@@ -23,13 +23,14 @@ import {
   generateStatusWithColor,
   generateUpdateStatusWithColor,
   getContractDetails,
-  initializePayment,
   initializePaystack,
   updateContract,
 } from "../Dashboard/Service/DashboardService";
 import { usePaystackPayment } from "react-paystack";
 import { PaystackButton } from "react-paystack";
 import DetailsTile from "./DetailsTile";
+import { PaystackPaymentButton } from "./CreatePayment";
+
 const ViewContract = ({ isOpen, onClose, id }) => {
   const [isLoading, setIsLoading] = useState(false);
   const user = JSON.parse(localStorage.getItem("vrhealms"));
@@ -97,27 +98,6 @@ const ViewContract = ({ isOpen, onClose, id }) => {
   };
   //END
 
-  const onSuccess = (reference) => {
-    if (reference.status === "success") {
-    } else {
-    }
-  };
-  const onClosePayment = () => {
-    // implementation for  whatever you want to do when the Paystack dialog closed.
-    console.log("Payment Cancelled");
-  };
-
-  const initializePayment = usePaystackPayment({
-    reference: new Date().getTime().toString(),
-    email: user.email,
-    amount: contractDetailsData.totalPrice * 100,
-    publicKey: publicKey,
-  });
-
-  const initP = () => {
-    initializePayment(onSuccess, onClosePayment);
-  };
-
   return (
     <Modal isOpen={isOpen} onClose={onClose} size={"xl"}>
       <ModalOverlay />
@@ -129,6 +109,7 @@ const ViewContract = ({ isOpen, onClose, id }) => {
               title="Contract Details"
               description="Full Details of this current product"
             />
+
             <Divider mt={5} mb={7} />{" "}
             {isLoading ? (
               <>LOADING OOO</>
@@ -177,15 +158,7 @@ const ViewContract = ({ isOpen, onClose, id }) => {
                   <p style={{ color: textColor }}>{statusText}</p>
                 </Flex>
                 <Divider mt={5} mb={7} />
-                <div
-                  style={{ backgroundColor: bgColorUpdate }}
-                  className="transac-status-details"
-                  onClick={() => {
-                    initializePayment(onSuccess, onClosePayment);
-                  }}
-                >
-                  <p style={{ color: textColorUpdate }}>{statusTextUpdate}</p>
-                </div>
+                {contractDetailsData.totalPrice && <PaystackPaymentButton amount={contractDetailsData?.totalPrice} bgColorUpdate={bgColorUpdate} textColorUpdate={textColorUpdate} statusTextUpdate={statusTextUpdate} />}
               </>
             )}
           </div>

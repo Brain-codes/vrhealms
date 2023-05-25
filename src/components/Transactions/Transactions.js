@@ -9,7 +9,7 @@ const Transactions = ({ contractItem, loadingState }) => {
   return (
     <div className="transactions-whole-cont">
       <div className="top-transc-with-search">
-        <h1>Transactions</h1>
+        <h1>All Contracts</h1>
 
         <div className="search-cont">
           <img src={Search} alt="" />
