@@ -1,0 +1,69 @@
+.navbar-container {
+  padding: 40px;
+  width: 327px;
+  //   border: 2px solid red;
+  height: 100vh;
+  z-index: 5;
+  background-color: white;
+}
+
+.navbar-title {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 25px;
+  color: #373741;
+}
+
+.navbar-logo {
+  img {
+    width: 60%;
+  }
+}
+
+.navbar-item {
+  display: flex;
+  padding-left: 15px;
+
+  p {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    color: #161616;
+  }
+}
+
+.active-item {
+  background: #f3f4fd;
+  border-radius: 10px;
+  padding: 15px 15px;
+}
+
+.foot-nav {
+  display: flex;
+  padding-left: 15px;
+  cursor: pointer;
+
+  p {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 23px;
+    color: #9594a6;
+  }
+}
+
+.teams-nav {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 15px;
+
+  p {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 23px;
+    color: #333333;
+  }
+}

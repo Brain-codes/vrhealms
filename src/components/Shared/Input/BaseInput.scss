@@ -1,0 +1,55 @@
+.input-cont-comp {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+
+  label {
+    font-weight: 400;
+    font-style: normal;
+    font-size: 15px;
+    color: #161616;
+    font-family: "Circular Std";
+  }
+
+  input {
+    width: 100%;
+    padding: 15px 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    outline: none;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 25px;
+    color: #121212;
+  }
+
+  input::placeholder {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 25px;
+    color: #7a7a7a;
+  }
+
+  input:active,
+  input:focus {
+    border: 1px solid #abc5ff;
+  }
+}
+
+@media screen and (max-width: 385px) {
+  .input-cont-comp {
+    label,
+    input::placeholder {
+      font-size: 12px;
+    }
+
+    input {
+      font-size: 12px;
+      padding: 12px 10px;
+    }
+  }
+}

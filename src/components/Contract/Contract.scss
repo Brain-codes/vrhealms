@@ -1,0 +1,85 @@
+.fixed-add-btn {
+  border-radius: 50%;
+  background-color: #2b4e9b;
+  //   width: 60px;
+  //   height: 60px;
+  position: fixed;
+  bottom: 2%;
+  right: 2%;
+  display: flex;
+  padding: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.contract-tile-cont {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.contract-cont-whole {
+  padding: 40px;
+}
+.right-contract-tile {
+  padding-left: 20px;
+  h1 {
+    font-family: "Circular Std 500";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    color: #161616;
+  }
+
+  p {
+    font-family: "Circular Std Normal";
+    font-style: normal;
+    font-weight: 450;
+    font-size: 15px;
+    color: #8d8d8d;
+  }
+}
+
+@media screen and (max-width: 472px) {
+  .contract-tile-cont {
+    img {
+      width: 40px;
+      height: 40px;
+    }
+  }
+  .right-contract-tile {
+    h1 {
+      font-size: 15px;
+    }
+
+    p {
+      font-size: 12px;
+    }
+  }
+
+  .contract-cont-whole {
+    padding: 20px;
+  }
+
+  .fixed-add-btn {
+    // width: 30px;
+    // height: 30px;
+    padding: 12px;
+  }
+}
+@media screen and (max-width: 385px) {
+  .right-contract-tile {
+    h1 {
+      font-size: 12px;
+    }
+
+    p {
+      font-size: 10px;
+    }
+  }
+}

@@ -1,0 +1,94 @@
+@font-face {
+  font-family: "circular Std Normal";
+  font-style: normal;
+  font-weight: 450;
+  src: local("Circular Std Normal"),
+    url(https://fonts.cdnfonts.com/s/15011/CircularStd-Book.woff) format("woff");
+}
+@font-face {
+  font-family: "circular Std";
+  font-style: italic;
+  font-weight: 450;
+  src: local("Circular Std"),
+    url(https://fonts.cdnfonts.com/s/15011/CircularStd-BookItalic.woff)
+      format("woff");
+}
+@font-face {
+  font-family: "circular Std 500";
+  font-style: normal;
+  font-weight: 500;
+  src: local("Circular Std 500"),
+    url(https://fonts.cdnfonts.com/s/15011/CircularStd-Medium.woff)
+      format("woff");
+}
+@font-face {
+  font-family: "circular Std";
+  font-style: italic;
+  font-weight: 500;
+  src: local("Circular Std"),
+    url(https://fonts.cdnfonts.com/s/15011/CircularStd-MediumItalic.woff)
+      format("woff");
+}
+@font-face {
+  font-family: "circular Std Bold";
+  font-style: normal;
+  font-weight: 700;
+  src: local("Circular Std Bold"),
+    url(https://fonts.cdnfonts.com/s/15011/CircularStd-Bold.woff) format("woff");
+}
+@font-face {
+  font-family: "circular Std";
+  font-style: italic;
+  font-weight: 700;
+  src: local("Circular Std"),
+    url(https://fonts.cdnfonts.com/s/15011/CircularStd-BoldItalic.woff)
+      format("woff");
+}
+@font-face {
+  font-family: "circular Std";
+  font-style: normal;
+  font-weight: 900;
+  src: local("Circular Std"),
+    url(https://fonts.cdnfonts.com/s/15011/CircularStd-Black.woff)
+      format("woff");
+}
+@font-face {
+  font-family: "circular Std";
+  font-style: italic;
+  font-weight: 900;
+  src: local("Circular Std"),
+    url(https://fonts.cdnfonts.com/s/15011/CircularStd-BlackItalic.woff)
+      format("woff");
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Outfit", sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+.auth-wrapper-cont {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: #f5f4f7;
+}
+
+.navbar-wrapper {
+  width: 327px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.chi-auth-wrapper {
+  margin-left: 327px;
+  padding-left: 3%;
+  padding-right: 3%;
+}
