@@ -63,12 +63,13 @@ export const PaystackHookExample = ({
     // implementation for  whatever you want to do when the Paystack dialog closed.
     // message.info("Payment Cancelled");
   };
+  const publicKey = process.env.REACT_APP_PAYSTACT_API_KEY;
 
   const initializePayment = usePaystackPayment({
     reference: new Date().getTime().toString(),
-    email: email,
-    amount: amount * 100,
-    publicKey: "pk_test_ccd9d31670a4e4be4917412334639e338067d4be",
+    email: "ade@gmail.com",
+    amount: 3000 * 100,
+    publicKey: publicKey,
   });
   return (
     <button
