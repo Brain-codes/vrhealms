@@ -27,7 +27,6 @@ const EachTransaction = ({
   date,
   status,
   id,
-  initPay,
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { textColor, bgColor, statusText } = generateStatusWithColor(
@@ -88,7 +87,6 @@ const EachTransaction = ({
               onClose();
             }}
             id={id}
-            initPay={initPay}
           />
         </>
       ) : (
