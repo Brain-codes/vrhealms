@@ -37,7 +37,7 @@ export const PaystackPaymentButton = ({ amount, bgColorUpdate, textColorUpdate, 
     // you can call this function anything
     const onClose = () => {
         // implementation for  whatever you want to do when the Paystack dialog closed.
-        console.log('Payment Cancelled')
+        console.log('Payment Cancel')
     }
 
 
