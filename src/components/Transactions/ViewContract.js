@@ -23,14 +23,11 @@ import {
   generateStatusWithColor,
   generateUpdateStatusWithColor,
   getContractDetails,
-  initializePaystack,
   updateContract,
 } from "../Dashboard/Service/DashboardService";
 import { usePaystackPayment } from "react-paystack";
 import DetailsTile from "./DetailsTile";
-import { PaystackPaymentButton } from "./CreatePayment";
-
-const ViewContract = ({ isOpen, onClose, id }) => {
+const ViewContract = ({ isOpen, onClose, id, initPay }) => {
   const [isLoading, setIsLoading] = useState(false);
   const user = JSON.parse(localStorage.getItem("vrhealms"));
   const [contractDetailsData, setContractDetailsData] = useState([]);
@@ -96,6 +93,28 @@ const ViewContract = ({ isOpen, onClose, id }) => {
     }
   };
   //END
+
+  const onSuccess = (reference) => {
+    if (reference.status === "success") {
+    } else {
+    }
+  };
+  const onClosePayment = () => {
+    // implementation for  whatever you want to do when the Paystack dialog closed.
+    console.log("Payment Cancelled");
+  };
+
+  const config = (amount) => {
+    console.log(publicKey);
+    return {
+      reference: new Date().getTime().toString(),
+      email: user.email,
+      amount: amount * 100,
+      publicKey: publicKey,
+    };
+  };
+
+  const initializePayment = usePaystackPayment(config);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} size={"xl"}>
