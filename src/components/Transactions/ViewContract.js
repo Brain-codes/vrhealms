@@ -23,11 +23,14 @@ import {
   generateStatusWithColor,
   generateUpdateStatusWithColor,
   getContractDetails,
+  initializePaystack,
   updateContract,
 } from "../Dashboard/Service/DashboardService";
 import { usePaystackPayment } from "react-paystack";
 import DetailsTile from "./DetailsTile";
-const ViewContract = ({ isOpen, onClose, id, initPay }) => {
+import { PaystackPaymentButton } from "./CreatePayment";
+
+const ViewContract = ({ isOpen, onClose, id }) => {
   const [isLoading, setIsLoading] = useState(false);
   const user = JSON.parse(localStorage.getItem("vrhealms"));
   const [contractDetailsData, setContractDetailsData] = useState([]);
@@ -94,28 +97,6 @@ const ViewContract = ({ isOpen, onClose, id, initPay }) => {
   };
   //END
 
-  const onSuccess = (reference) => {
-    if (reference.status === "success") {
-    } else {
-    }
-  };
-  const onClosePayment = () => {
-    // implementation for  whatever you want to do when the Paystack dialog closed.
-    console.log("Payment Cancelled");
-  };
-
-  const config = (amount) => {
-    console.log(publicKey);
-    return {
-      reference: new Date().getTime().toString(),
-      email: user.email,
-      amount: amount * 100,
-      publicKey: publicKey,
-    };
-  };
-
-  const initializePayment = usePaystackPayment(config);
-
   return (
     <Modal isOpen={isOpen} onClose={onClose} size={"xl"}>
       <ModalOverlay />
@@ -127,6 +108,7 @@ const ViewContract = ({ isOpen, onClose, id, initPay }) => {
               title="Contract Details"
               description="Full Details of this current product"
             />
+
             <Divider mt={5} mb={7} />{" "}
             {isLoading ? (
               <>LOADING OOO</>
@@ -175,13 +157,7 @@ const ViewContract = ({ isOpen, onClose, id, initPay }) => {
                   <p style={{ color: textColor }}>{statusText}</p>
                 </Flex>
                 <Divider mt={5} mb={7} />
-                <div
-                  style={{ backgroundColor: bgColorUpdate }}
-                  className="transac-status-details"
-                  onClick={initPay}
-                >
-                  <p style={{ color: textColorUpdate }}>{statusTextUpdate}</p>
-                </div>
+                {contractDetailsData.totalPrice && <PaystackPaymentButton amount={contractDetailsData?.totalPrice} bgColorUpdate={bgColorUpdate} textColorUpdate={textColorUpdate} statusTextUpdate={statusTextUpdate} />}
               </>
             )}
           </div>
