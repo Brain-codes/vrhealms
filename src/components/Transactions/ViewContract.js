@@ -27,7 +27,6 @@ import {
   updateContract,
 } from "../Dashboard/Service/DashboardService";
 import { usePaystackPayment } from "react-paystack";
-import { PaystackButton } from "react-paystack";
 import DetailsTile from "./DetailsTile";
 import { PaystackPaymentButton } from "./CreatePayment";
 

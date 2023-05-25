@@ -8,6 +8,7 @@ import ScrollToTop from "./components/Wrapper/ScrollToTop";
 import Dashboard from "./components/Dashboard/Dashboard";
 import AuthenticatedWrapper from "./components/Wrapper/AuthenticatedWrapper";
 import Layout from "./components/Navbar/Layout";
+import { PaystackHookExample } from "./components/Transactions/TestPay";
 
 function App() {
   return (
@@ -25,7 +26,8 @@ function App() {
                 <Dashboard />
               </Layout>
             }
-          />
+          />{" "}
+          <Route path="/pay" element={<PaystackHookExample />} />
         </Routes>
       </Wrapper>
     </Router>

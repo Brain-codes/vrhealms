@@ -17,7 +17,7 @@ import {
   Button,
   useDisclosure,
 } from "@chakra-ui/react";
-import  ViewContract from "./ViewContract";
+import ViewContract from "./ViewContract";
 
 const EachTransaction = ({
   name,
@@ -27,6 +27,7 @@ const EachTransaction = ({
   date,
   status,
   id,
+  initPay,
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { textColor, bgColor, statusText } = generateStatusWithColor(
@@ -87,6 +88,7 @@ const EachTransaction = ({
               onClose();
             }}
             id={id}
+            initPay={initPay}
           />
         </>
       ) : (
