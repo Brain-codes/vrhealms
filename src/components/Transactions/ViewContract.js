@@ -23,8 +23,6 @@ import {
   generateStatusWithColor,
   generateUpdateStatusWithColor,
   getContractDetails,
-  initializePayment,
-  initializePaystack,
   updateContract,
 } from "../Dashboard/Service/DashboardService";
 import { usePaystackPayment } from "react-paystack";
@@ -107,16 +105,18 @@ const ViewContract = ({ isOpen, onClose, id }) => {
     console.log("Payment Cancelled");
   };
 
-  const initializePayment = usePaystackPayment({
-    reference: new Date().getTime().toString(),
-    email: user.email,
-    amount: contractDetailsData.totalPrice * 100,
-    publicKey: publicKey,
-  });
 
-  const initP = () => {
-    initializePayment(onSuccess, onClosePayment);
+
+  const config = (amount) => {
+    return {
+      reference: new Date().getTime().toString(),
+      email: user.email,
+      amount: amount * 100,
+      publicKey: publicKey,
+    };
   };
+
+  const initializePayment = usePaystackPayment(config);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} size={"xl"}>
@@ -181,6 +181,7 @@ const ViewContract = ({ isOpen, onClose, id }) => {
                   style={{ backgroundColor: bgColorUpdate }}
                   className="transac-status-details"
                   onClick={() => {
+                    config(contractDetailsData.totalPrice);
                     initializePayment(onSuccess, onClosePayment);
                   }}
                 >

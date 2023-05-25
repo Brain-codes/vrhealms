@@ -17,7 +17,7 @@ import {
   Button,
   useDisclosure,
 } from "@chakra-ui/react";
-import  ViewContract from "./ViewContract";
+import ViewContract from "./ViewContract";
 
 const EachTransaction = ({
   name,
