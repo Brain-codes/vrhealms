@@ -26,9 +26,8 @@ import {
   updateContract,
 } from "../Dashboard/Service/DashboardService";
 import { usePaystackPayment } from "react-paystack";
-import { PaystackButton } from "react-paystack";
 import DetailsTile from "./DetailsTile";
-const ViewContract = ({ isOpen, onClose, id }) => {
+const ViewContract = ({ isOpen, onClose, id, initPay }) => {
   const [isLoading, setIsLoading] = useState(false);
   const user = JSON.parse(localStorage.getItem("vrhealms"));
   const [contractDetailsData, setContractDetailsData] = useState([]);
@@ -105,9 +104,8 @@ const ViewContract = ({ isOpen, onClose, id }) => {
     console.log("Payment Cancelled");
   };
 
-
-
   const config = (amount) => {
+    console.log(publicKey);
     return {
       reference: new Date().getTime().toString(),
       email: user.email,
@@ -180,10 +178,7 @@ const ViewContract = ({ isOpen, onClose, id }) => {
                 <div
                   style={{ backgroundColor: bgColorUpdate }}
                   className="transac-status-details"
-                  onClick={() => {
-                    config(contractDetailsData.totalPrice);
-                    initializePayment(onSuccess, onClosePayment);
-                  }}
+                  onClick={initPay}
                 >
                   <p style={{ color: textColorUpdate }}>{statusTextUpdate}</p>
                 </div>
