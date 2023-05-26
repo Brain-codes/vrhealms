@@ -26,12 +26,12 @@ export const getAllContracts = async (userId, toast) => {
   }
 };
 
-export const makePayment = async (contractId, toast, reference) => {
+export const makePayment = async (contractId, toast, reference, amount) => {
   try {
     const response = await post("payments", {
       contractId: contractId,
       email: user.email,
-      paymentData: reference,
+      paymentData: { ...reference, amount },
     });
     if (response.success === true) {
       toast({
