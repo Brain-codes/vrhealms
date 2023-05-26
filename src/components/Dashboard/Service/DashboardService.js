@@ -26,6 +26,38 @@ export const getAllContracts = async (userId, toast) => {
   }
 };
 
+export const makePayment = async (contractId, toast, reference) => {
+  try {
+    const response = await post("payments", {
+      contractId: contractId,
+      email: user.email,
+      paymentData: reference,
+    });
+    if (response.success === true) {
+      toast({
+        title: "Payment",
+        description: response.message,
+        status: "success",
+      });
+      return response.contracts;
+    } else {
+      toast({
+        title: "Incorrect Credentials",
+        description: response.message,
+        status: "error",
+      });
+      return [];
+    }
+  } catch (error) {
+    toast({
+      title: "Oops",
+      description: error.message,
+      status: "error",
+    });
+    return [];
+  }
+};
+
 export const getContractDetails = async (userId, toast, contractId) => {
   try {
     const response = await post(
@@ -200,7 +232,7 @@ export const generateUpdateStatusWithColor = (roleIn, statusIn) => {
       return {
         textColor: "#FF3838",
         bgColor: "#ff383830",
-        statusText: "Unpaid",
+        statusText: "Awaiting Payment",
         newStatus: newStatus,
       };
     } else if (statusIn === 1) {

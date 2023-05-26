@@ -18,7 +18,7 @@ import ContractTile from "./ContractTile";
 import BaseFilledButton from "../Shared/Button/BaseFilledButton";
 import CreateContract from "./CreateContract";
 
-const Contract = ({refreshContracts}) => {
+const Contract = ({ refreshContracts }) => {
   const [contractType, setContractType] = useState("");
   const [contractFormOpen, setContractFormOpen] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -45,7 +45,7 @@ const Contract = ({refreshContracts}) => {
               setContractFormOpen(false);
               onClose();
             }}
-            contractType={contractType}
+            contractType={contractType.toLowerCase}
             refreshContracts={refreshContracts}
           />
         </>
@@ -70,7 +70,7 @@ const Contract = ({refreshContracts}) => {
                     Image={Seller}
                     title="Seller"
                     description="Create a contract as a seller of a good"
-                    onClick={() => createContractForm("Buyer")}
+                    onClick={() => createContractForm("Seller")}
                   />
                   <Box mt={5}></Box>
 
@@ -78,7 +78,7 @@ const Contract = ({refreshContracts}) => {
                     Image={Seller}
                     title="Buyer"
                     description="Create a contract as a buyer of a good"
-                    onClick={() => createContractForm("Seller")}
+                    onClick={() => createContractForm("Buyer")}
                   />
                   <Box mt={10} mb={10}></Box>
                   <Box mt={10} mb={10}></Box>

@@ -49,7 +49,14 @@ const EachTransaction = ({
           <p>{name}</p>
         </div>
       </div>
-      <p className="type">{role}</p>
+      <p
+        className="type"
+        style={{
+          textTransform: "capitalize",
+        }}
+      >
+        {role}
+      </p>
       <div style={{ backgroundColor: bgColor }} className="transac-status">
         <p style={{ color: textColor }}>{statusText}</p>
       </div>

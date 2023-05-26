@@ -108,7 +108,6 @@ const ViewContract = ({ isOpen, onClose, id }) => {
               title="Contract Details"
               description="Full Details of this current product"
             />
-
             <Divider mt={5} mb={7} />{" "}
             {isLoading ? (
               <>LOADING OOO</>
@@ -157,7 +156,35 @@ const ViewContract = ({ isOpen, onClose, id }) => {
                   <p style={{ color: textColor }}>{statusText}</p>
                 </Flex>
                 <Divider mt={5} mb={7} />
-                {contractDetailsData.totalPrice && <PaystackPaymentButton amount={contractDetailsData?.totalPrice} bgColorUpdate={bgColorUpdate} textColorUpdate={textColorUpdate} statusTextUpdate={statusTextUpdate} />}
+                {console.log(newStatus)}
+                {newStatus === 1 ? (
+                  <>
+                    {contractDetailsData.totalPrice && (
+                      <PaystackPaymentButton
+                        amount={contractDetailsData?.totalPrice}
+                        bgColorUpdate={bgColorUpdate}
+                        textColorUpdate={textColorUpdate}
+                        statusTextUpdate={statusTextUpdate}
+                        closeModals={onClose}
+                        contractId={contractDetailsData?.contractId}
+                      />
+                    )}
+                  </>
+                ) : (
+                  <>
+                    <div
+                      style={{ backgroundColor: bgColorUpdate }}
+                      className="transac-status-details"
+                      onClick={() => {
+                        console.log("first");
+                      }}
+                    >
+                      <p style={{ color: textColorUpdate }}>
+                        {statusTextUpdate}
+                      </p>
+                    </div>
+                  </>
+                )}
               </>
             )}
           </div>

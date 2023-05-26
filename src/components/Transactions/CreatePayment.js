@@ -1,62 +1,70 @@
-import React, { useState } from 'react';
-import axios from 'axios'
-import { usePaystackPayment } from 'react-paystack';
-const URL = 'https://bac.solarcredit.io/v0.1/api'
+import React, { useState } from "react";
+import axios from "axios";
+import { usePaystackPayment } from "react-paystack";
+import { useToast } from "@chakra-ui/react";
+import { makePayment } from "../Dashboard/Service/DashboardService";
+const URL = "https://bac.solarcredit.io/v0.1/api";
 const user = JSON.parse(localStorage.getItem("vrhealms"));
 const publicKey = process.env.REACT_APP_PAYSTACT_API_KEY;
 
-export const PaystackPaymentButton = ({ amount, bgColorUpdate, textColorUpdate, statusTextUpdate }) => {
+export const PaystackPaymentButton = ({
+  amount,
+  bgColorUpdate,
+  textColorUpdate,
+  statusTextUpdate,
+  closeModals,
+  contractId,
+}) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const toast = useToast({
+    isClosable: true,
+    position: "bottom-left",
+    variant: "solid",
+    duration: 9000,
+  });
 
-    const [payLoader, setPayLoader] = useState(false)
+  const onSuccess = (reference) => {
+    return makePaymentOnline(reference);
+  };
 
-    const onSuccess = (reference) => {
-        // Implementation for whatever you want to do with reference and after success call.
-        return handleSuccess(reference)
-    };
-
-    //Function to call after sucessfull purchase
-    const handleSuccess = async (payload) => {
-        setPayLoader(true)
-        try {
-            const res = await axios.post(`${URL}/p/verifyToFundWallet`, {
-
-            })
-            setPayLoader(false)
-            if (res.data.success) {
-                console.log('Transaction Sucessfull')
-            } else {
-                console.log(res.data.message)
-            }
-        } catch (error) {
-            setPayLoader(false)
-            console.log(error.message)
-        }
-
+  const makePaymentOnline = async (reference) => {
+    setIsLoading(true);
+    try {
+      await makePayment(contractId, toast, reference);
+      closeModals();
+    } catch (error) {
+    } finally {
+      setIsLoading(false);
     }
+  };
 
-    // you can call this function anything
-    const onClose = () => {
-        // implementation for  whatever you want to do when the Paystack dialog closed.
-        console.log('Payment Cancel')
-    }
-
-
-    const initializePayment = usePaystackPayment({
-        reference: (new Date()).getTime().toString(),
-        email: user?.email,
-        amount: amount * 100,
-        publicKey: publicKey,
+  const onClosePayment = () => {
+    closeModals();
+    toast({
+      title: "Payment",
+      description: "You have canceled you payment",
+      status: "info",
     });
+  };
 
+  const initializePayment = usePaystackPayment({
+    reference: new Date().getTime().toString(),
+    email: user?.email,
+    amount: amount * 100,
+    publicKey: publicKey,
+  });
 
-    return (
-        <button
-            style={{ backgroundColor: bgColorUpdate }}
-            className="transac-status-details"
-            onClick={() => { initializePayment(onSuccess, onClose) }}
-        >
-            <p style={{ color: textColorUpdate }}>{payLoader ? 'Paying..' : statusTextUpdate}</p>
-        </button>
-    );
+  return (
+    <button
+      style={{ backgroundColor: bgColorUpdate }}
+      className="transac-status-details"
+      onClick={() => {
+        initializePayment(onSuccess, onClosePayment);
+      }}
+    >
+      <p style={{ color: textColorUpdate }}>
+        {isLoading ? "Paying.." : statusTextUpdate}
+      </p>
+    </button>
+  );
 };
-
