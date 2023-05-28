@@ -9,7 +9,7 @@ import BaseInput from "../Shared/Input/BaseInput";
 import { Link, useNavigate } from "react-router-dom";
 import BaseFilledButton from "../Shared/Button/BaseFilledButton";
 import { useToast } from "@chakra-ui/react";
-import LoadingButton from "../Shared/Button/LoadingButton";
+import {LoadingButton} from "../Shared/Button/LoadingButton";
 
 const Login = () => {
   const [email, setEmail] = useState();

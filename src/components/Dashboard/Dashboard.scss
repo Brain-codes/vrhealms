@@ -215,4 +215,22 @@
   .status {
     display: none !important;
   }
+
+  .recent-item-cont {
+    .name-time {
+      margin-left: 0px;
+
+      h2 {
+        font-size: 15px;
+        font-weight: 550;
+      }
+      p {
+        font-size: 12px;
+      }
+    }
+    .price {
+      font-size: 15px;
+      font-weight: 550;
+    }
+  }
 }

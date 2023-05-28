@@ -5,7 +5,7 @@ import { Box } from "@chakra-ui/react";
 const BaseInput = ({ label, type, placeholder, onChange, value }) => {
   return (
     <div className="input-cont-comp">
-      <label>{label}</label>
+      <label style={{ textTransform: "capitalize" }}>{label}</label>
       <Box mt={2}></Box>
       <input
         type={type}

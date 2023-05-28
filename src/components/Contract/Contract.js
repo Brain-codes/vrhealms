@@ -45,7 +45,7 @@ const Contract = ({ refreshContracts }) => {
               setContractFormOpen(false);
               onClose();
             }}
-            contractType={contractType.toLowerCase}
+            contractType={contractType.toLowerCase()}
             refreshContracts={refreshContracts}
           />
         </>

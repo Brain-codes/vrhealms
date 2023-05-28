@@ -39,6 +39,9 @@ const CreateContract = ({
   const [productQuantity, setProductQuantity] = useState(null);
   const [deliveryPrice, setDeliveryPrice] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [newContractType, setNewContractType] = useState(
+    contractType == "buyer" ? "Seller" : "Buyer"
+  );
 
   const toast = useToast({
     isClosable: true,
@@ -101,28 +104,26 @@ const CreateContract = ({
           <ModalCloseButton />
           <form className="contract-cont-whole" onSubmit={_createContract}>
             <BaseModalHeader
-              title={
-                contractType == "Buyer" ? "Sellers Contract" : "Buyers Contract"
-              }
+              title={`${contractType}'s contract`}
               description="Fill up the required field to continue and create a contract to continue transaction"
             />
             <Box mt={10} mb={10}></Box>
             <Box mt={10} mb={10}></Box>
             <Flex color="white" gap={2} wrap={true}>
               <BaseInput
-                label={`${contractType}'s First Name`}
+                label={`${newContractType}'s First Name`}
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
               />
               <BaseInput
-                label={`${contractType}'s Last Name`}
+                label={`${newContractType}'s Last Name`}
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
               />
             </Flex>
             <Box mt={5}></Box>
             <BaseInput
-              label={`${contractType}'s Email Address`}
+              label={`${newContractType}'s Email Address`}
               value={email}
               type="email"
               onChange={(e) => setEmail(e.target.value)}
@@ -135,7 +136,7 @@ const CreateContract = ({
             />
             <Box mt={5}></Box>
             <BaseInput
-              label={`${contractType}'s Phone Number`}
+              label={`${newContractType}'s Phone Number`}
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
             />

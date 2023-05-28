@@ -31,7 +31,11 @@ export const makePayment = async (contractId, toast, reference, amount) => {
     const response = await post("payments", {
       contractId: contractId,
       email: user.email,
-      paymentData: { ...reference, amount },
+      paymentData: {
+        ...reference,
+        amount,
+        transaction_date: new Date(),
+      },
     });
     if (response.success === true) {
       toast({
@@ -98,6 +102,11 @@ export const updateContract = async (
       { contractId: contractId, contractStatus: contractStatus }
     );
     if (response.success === true) {
+      toast({
+        title: "Updated",
+        description: response.message,
+        status: "success",
+      });
       return response.data;
     } else {
       toast({
@@ -211,13 +220,15 @@ export const generateUpdateStatusWithColor = (roleIn, statusIn) => {
         bgColor: "#ffb30336",
         statusText: "Pay",
         newStatus: newStatus,
+        clickable: true,
       };
     } else if (statusIn === 2) {
       return {
         textColor: "#56F000",
         bgColor: "#56f00033",
-        statusText: "Dispatched",
+        statusText: "Awaiting Dispatched",
         newStatus: newStatus,
+        clickable: false,
       };
     } else if (statusIn === 3) {
       return {
@@ -225,6 +236,15 @@ export const generateUpdateStatusWithColor = (roleIn, statusIn) => {
         bgColor: "#5bd6fc29",
         statusText: "Confirm Delivery",
         newStatus: newStatus,
+        clickable: true,
+      };
+    } else if (statusIn === 4) {
+      return {
+        textColor: "#2DCCFF",
+        bgColor: "#5bd6fc29",
+        statusText: "Contract Resolved",
+        newStatus: newStatus,
+        clickable: false,
       };
     }
   } else if (roleIn === "Seller" || roleIn === "seller") {
@@ -232,29 +252,40 @@ export const generateUpdateStatusWithColor = (roleIn, statusIn) => {
       return {
         textColor: "#FF3838",
         bgColor: "#ff383830",
-        statusText: "Awaiting Payment",
+        statusText: "Unpaid",
         newStatus: newStatus,
       };
     } else if (statusIn === 1) {
       return {
         textColor: "#FFB302",
         bgColor: "#ffb30336",
-        statusText: "Paid",
+        statusText: "Awaiting Payment",
         newStatus: newStatus,
+        clickable: false,
       };
     } else if (statusIn === 2) {
       return {
         textColor: "#56F000",
         bgColor: "#56f00033",
-        statusText: "Dispatched",
+        statusText: "Dispach Goods",
         newStatus: newStatus,
+        clickable: true,
       };
     } else if (statusIn === 3) {
       return {
         textColor: "#2DCCFF",
         bgColor: "#5bd6fc29",
-        statusText: "Delivered",
+        statusText: "Awaiting Delivery",
         newStatus: newStatus,
+        clickable: false,
+      };
+    } else if (statusIn === 4) {
+      return {
+        textColor: "#2DCCFF",
+        bgColor: "#5bd6fc29",
+        statusText: "Contract Resolved",
+        newStatus: newStatus,
+        clickable: false,
       };
     }
   }

@@ -20,6 +20,8 @@ import {
 } from "@chakra-ui/react";
 import BaseModalHeader from "../Shared/Headers/BaseModalHeader";
 import {
+  generateFormattedAmount,
+  generateFormattedDate,
   generateStatusWithColor,
   generateUpdateStatusWithColor,
   getContractDetails,
@@ -29,6 +31,8 @@ import {
 import { usePaystackPayment } from "react-paystack";
 import DetailsTile from "./DetailsTile";
 import { PaystackPaymentButton } from "./CreatePayment";
+import { LoadingStatusButton } from "../Shared/Button/LoadingButton";
+import { ContractLoading } from "../Shared/Loading/LoadingState";
 
 const ViewContract = ({ isOpen, onClose, id }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -73,6 +77,7 @@ const ViewContract = ({ isOpen, onClose, id }) => {
     bgColor: bgColorUpdate,
     statusText: statusTextUpdate,
     newStatus,
+    clickable,
   } = generateUpdateStatusWithColor(
     contractDetailsData.invoiceRole,
     contractDetailsData.contractStatus
@@ -80,8 +85,9 @@ const ViewContract = ({ isOpen, onClose, id }) => {
   //END
 
   //UPDATE CONTRACT
+  const [isLoadingUpdate, setIsLoadingUpdate] = useState(false);
   const handleUpdateContract = async () => {
-    setIsLoading(true);
+    setIsLoadingUpdate(true);
     try {
       const contractDetails = await updateContract(
         user.id,
@@ -92,7 +98,7 @@ const ViewContract = ({ isOpen, onClose, id }) => {
       fetchContractDetails();
     } catch (error) {
     } finally {
-      setIsLoading(false);
+      setIsLoadingUpdate(false);
     }
   };
   //END
@@ -110,79 +116,207 @@ const ViewContract = ({ isOpen, onClose, id }) => {
             />
             <Divider mt={5} mb={7} />{" "}
             {isLoading ? (
-              <>LOADING OOO</>
+              <>
+                <ContractLoading />
+                <Box pb={10}></Box>
+                <Divider mt={5} mb={7} /> <ContractLoading />
+                <Box pb={10}></Box>
+                <Divider mt={5} mb={7} /> <ContractLoading />
+              </>
             ) : (
               <>
                 <DetailsTile
                   title="Contract Title"
                   value={contractDetailsData.invoiceTitle}
                 />
+                <Divider mt={5} mb={7} />{" "}
                 <DetailsTile
-                  title="Goods Description"
+                  title="Product Name"
+                  value={contractDetailsData.productName}
+                />
+                <DetailsTile
+                  title="Product Description"
                   value={contractDetailsData.productDesc}
+                />
+                <DetailsTile
+                  title="Date Initiated"
+                  value={`${generateFormattedDate(
+                    contractDetailsData?.createdAt ?? ""
+                  )}`}
                 />
                 <Divider mt={5} mb={7} />{" "}
                 <DetailsTile
-                  title="Buyer's Name"
+                  title="Name"
                   value={contractDetailsData?.invoiceAlpha?.fullname}
                 />
                 <DetailsTile
-                  title="Buyer's email"
+                  title="Email"
                   value={contractDetailsData?.invoiceAlpha?.email}
                 />
                 <Divider mt={5} mb={7} />{" "}
                 <DetailsTile
-                  title="Seller's Name"
+                  title="Recipient Name"
                   value={contractDetailsData?.recipientName}
                 />
-                <Flex color="white" gap={10} wrap={true}>
+                <Flex color="white" gap={0} wrap={"wrap"}>
                   <DetailsTile
-                    title="Seller's email"
+                    title="Recipient Email"
                     value={contractDetailsData?.recipientEmail}
                   />
+                  <Box pr={10}></Box>{" "}
                   <DetailsTile
-                    title="Seller's email"
+                    title="Recipient Number"
                     value={contractDetailsData?.recipientNumber}
                   />
                 </Flex>
                 <Divider mt={5} mb={7} />
                 <Flex
                   color="white"
-                  gap={10}
-                  wrap={true}
-                  className="update-contract-cont"
+                  gap={0}
+                  wrap={"wrap"}
+                  justifyContent={"space-between"}
                 >
-                  <h2>Status:</h2>
-                  <p style={{ color: textColor }}>{statusText}</p>
+                  <DetailsTile
+                    title="Quantity"
+                    value={contractDetailsData?.productQty}
+                  />
+                  <DetailsTile
+                    title="Price"
+                    value={`N${generateFormattedAmount(
+                      contractDetailsData?.productPrice ?? 0
+                    )}`}
+                  />
+                  <DetailsTile
+                    title="Delivery Price"
+                    value={`N${generateFormattedAmount(
+                      contractDetailsData?.deliveryPrice ?? 0
+                    )}`}
+                  />
                 </Flex>
                 <Divider mt={5} mb={7} />
-                {console.log(newStatus)}
+                <DetailsTile
+                  title="Total Price"
+                  value={`N${generateFormattedAmount(
+                    contractDetailsData?.totalPrice ?? 0
+                  )}`}
+                />
+                <Divider mt={5} mb={7} />
+                <Flex
+                  color="white"
+                  gap={20}
+                  wrap={"wrap"}
+                  className="update-contract-cont"
+                >
+                  <Flex color="white" gap={2} wrap={true}>
+                    <h2>Status:</h2>
+                    <p style={{ color: textColor }}>{statusText}</p>
+                  </Flex>
+                  <Flex color="white" gap={2} wrap={true}>
+                    <h2>Role:</h2>
+                    <p style={{ textTransform: "capitalize" }}>
+                      {contractDetailsData.invoiceRole}
+                    </p>
+                  </Flex>
+                </Flex>
+                <Divider mt={5} mb={7} />
                 {newStatus === 1 ? (
                   <>
-                    {contractDetailsData.totalPrice && (
-                      <PaystackPaymentButton
-                        amount={contractDetailsData?.totalPrice}
-                        bgColorUpdate={bgColorUpdate}
-                        textColorUpdate={textColorUpdate}
-                        statusTextUpdate={statusTextUpdate}
-                        closeModals={onClose}
-                        contractId={contractDetailsData?.contractId}
-                      />
+                    {contractDetailsData.invoiceRole == "buyer" ? (
+                      <>
+                        {contractDetailsData.totalPrice && (
+                          <PaystackPaymentButton
+                            amount={contractDetailsData?.totalPrice}
+                            bgColorUpdate={bgColorUpdate}
+                            textColorUpdate={textColorUpdate}
+                            statusTextUpdate={statusTextUpdate}
+                            closeModals={onClose}
+                            contractId={contractDetailsData?.contractId}
+                          />
+                        )}
+                      </>
+                    ) : (
+                      <button
+                        style={{
+                          backgroundColor: bgColorUpdate,
+                          cursor: "progress",
+                        }}
+                        className="transac-status-details"
+                      >
+                        <p style={{ color: textColorUpdate }}>
+                          {statusTextUpdate}
+                        </p>
+                      </button>
                     )}
                   </>
                 ) : (
                   <>
-                    <div
-                      style={{ backgroundColor: bgColorUpdate }}
-                      className="transac-status-details"
-                      onClick={() => {
-                        console.log("first");
-                      }}
-                    >
-                      <p style={{ color: textColorUpdate }}>
-                        {statusTextUpdate}
-                      </p>
-                    </div>
+                    {clickable ? (
+                      <>
+                        {isLoadingUpdate ? (
+                          <>
+                            <LoadingStatusButton
+                              color={textColorUpdate}
+                              bgColor={bgColorUpdate}
+                            />
+                          </>
+                        ) : (
+                          <div
+                            style={{ backgroundColor: bgColorUpdate }}
+                            className="transac-status-details"
+                            onClick={() => {
+                              handleUpdateContract();
+                            }}
+                          >
+                            <p style={{ color: textColorUpdate }}>
+                              {statusTextUpdate}
+                            </p>
+                          </div>
+                        )}
+                      </>
+                    ) : (
+                      <div
+                        style={{
+                          backgroundColor: bgColorUpdate,
+                          cursor: "progress",
+                        }}
+                        className="transac-status-details"
+                      >
+                        <p style={{ color: textColorUpdate }}>
+                          {statusTextUpdate}
+                        </p>
+                      </div>
+                    )}
+                    {/* {contractDetailsData.status == 1 ? (
+                      <>
+                        <p>Please wait while seler dispatches the product</p>
+                        <Box pb={3}></Box>
+                        <div
+                          style={{ backgroundColor: bgColorUpdate }}
+                          className="transac-status-details"
+                          onClick={() => {
+                            console.log("first");
+                          }}
+                        >
+                          <p style={{ color: textColorUpdate }}>
+                            {statusTextUpdate}
+                          </p>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div
+                          style={{ backgroundColor: bgColorUpdate }}
+                          className="transac-status-details"
+                          onClick={() => {
+                            console.log("first");
+                          }}
+                        >
+                          <p style={{ color: textColorUpdate }}>
+                            {statusTextUpdate}
+                          </p>
+                        </div>
+                      </>
+                    )} */}
                   </>
                 )}
               </>

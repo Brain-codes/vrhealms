@@ -6,7 +6,7 @@ const BaseModalHeader = ({ title, description, colorShade }) => {
     <div className="modal-header">
       {colorShade == "dark" || colorShade == null || colorShade == undefined ? (
         <>
-          <h1>{title}</h1>
+          <h1 style={{ textTransform: "capitalize" }}>{title}</h1>
           <p>{description}</p>
         </>
       ) : colorShade == "light" ? (

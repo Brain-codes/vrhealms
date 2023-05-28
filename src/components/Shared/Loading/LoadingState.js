@@ -1,4 +1,5 @@
 import {
+  Box,
   Skeleton,
   SkeletonCircle,
   SkeletonText,
@@ -17,6 +18,19 @@ export const TransactionItemLoading = () => {
       <Skeleton height="20px" width="10%" />
       <Skeleton height="20px" width="10%" />
       <Skeleton height="20px" width="20%" />
+    </div>
+  );
+};
+
+export const ContractLoading = () => {
+  return (
+    <div>
+      <Skeleton height="30px" width="30%" />
+      <Box pb={5}></Box> <Skeleton height="10px" width="100%" />
+      <Box pb={2}></Box> <Skeleton height="10px" width="80%" />{" "}
+      <Box pb={2}></Box>
+      <Skeleton height="10px" width="50%" /> <Box pb={2}></Box>
+      <Skeleton height="10px" width="10%" /> <Box pb={2}></Box>
     </div>
   );
 };

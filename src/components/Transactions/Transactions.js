@@ -5,9 +5,10 @@ import EachTransaction from "./EachTransaction";
 import { generateFormattedDate } from "../Dashboard/Service/DashboardService";
 import { TransactionItemLoading } from "../Shared/Loading/LoadingState";
 import { usePaystackPayment } from "react-paystack";
+import { Box } from "@chakra-ui/react";
+import emptyImage from "../../images/123936-empty-ghost.gif";
 
 const Transactions = ({ contractItem, loadingState }) => {
-
   return (
     <div className="transactions-whole-cont">
       <div className="top-transc-with-search">
@@ -29,7 +30,16 @@ const Transactions = ({ contractItem, loadingState }) => {
         <>
           {contractItem.length <= 0 ? (
             <>
-              <h1>empty list</h1>
+              <div className="empty-cont">
+                <Box pb={10}></Box>
+                <img src={emptyImage} alt="JSON Image" />
+                {/* <Box pb={10}></Box> */}
+                <p>
+                  Oops! It looks like you currently don't have any contract at
+                  the moment{" "}
+                </p>
+                <Box pb={10}></Box>
+              </div>
             </>
           ) : (
             <>
@@ -55,7 +65,6 @@ const Transactions = ({ contractItem, loadingState }) => {
                     date={generateFormattedDate(createdAt)}
                     status={contractStatus}
                     id={contractId}
-      
                   />
                 );
               })}

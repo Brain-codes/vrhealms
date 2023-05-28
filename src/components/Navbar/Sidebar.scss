@@ -141,6 +141,13 @@
 
 @media (max-width: 571px) {
   .content {
+    // padding: 0px 3% 0px 3% !important;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 337px) {
+  .content {
     padding: 0px 3% 0px 3% !important;
     margin-left: 0;
   }

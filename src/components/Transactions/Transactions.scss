@@ -163,6 +163,21 @@
   cursor: pointer;
 }
 
+.empty-cont {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    text-align: center;
+    font-style: normal;
+    font-weight: 450;
+    font-size: 16px;
+    color: #848484;
+    font-family: "Circular Std Normal", sans-serif;
+  }
+}
 .update-contract-cont {
   margin-bottom: 20px;
   h2 {

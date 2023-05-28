@@ -9,7 +9,7 @@ import BaseInput from "../Shared/Input/BaseInput";
 import { Link, useNavigate } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
 import BaseFilledButton from "../Shared/Button/BaseFilledButton";
-import LoadingButton from "../Shared/Button/LoadingButton";
+import {LoadingButton} from "../Shared/Button/LoadingButton";
 
 const Signup = () => {
   const [fullName, setFullName] = useState();
