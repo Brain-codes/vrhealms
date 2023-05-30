@@ -5,11 +5,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 const Layout = ({ children, pageLocation }) => {
   const navigate = useNavigate();
   const location = useLocation();
-
+  const user = localStorage.getItem("vrhealms");
   useEffect(() => {
-    const user = localStorage.getItem("vrhealms");
-    if (!user) {
-      navigate("/");
+    if (user === null) {
+      navigate("/login");
     } else {
       // Add your logic to handle redirection based on the current location
       if (location.pathname === "/dashboard") {

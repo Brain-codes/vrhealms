@@ -82,7 +82,7 @@ const Dashboard = () => {
     <div className="dashboard-whole-cont">
       <div className="welcome-container">
         <BaseModalHeader
-          title={`Welcome, ${user.name.split(" ")[0]}`}
+          title={`Welcome, ${user?.name.split(" ")[0]}`}
           description="We are here to help you manage your transactions in all shopping platforms"
           colorShade="light"
         />
