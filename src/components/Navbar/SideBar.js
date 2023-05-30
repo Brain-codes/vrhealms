@@ -3,11 +3,11 @@ import "./Sidebar.scss";
 import Logo from "../../images/text_logo.svg";
 import { Box } from "@chakra-ui/react";
 import Dashboard from "../../images/dashboard.svg";
-import User from "../../images/user.svg";
+import Transactions from "../../images/transaction.svg";
 import Settings from "../../images/settings.svg";
 import Logout from "../../images/logout.svg";
-import Card from "../../images/card.svg";
-import Chart from "../../images/chart.svg";
+import Contracts from "../../images/contracts.svg";
+import Contact from "../../images/contact.svg";
 import Menu from "../../images/menu.svg";
 import Close from "../../images/close.svg";
 import Profile from "../../images/profile.svg";
@@ -25,6 +25,13 @@ const Sidebar = ({ children, pageLocation }) => {
     variant: "solid",
     duration: 9000,
   });
+
+  const openTwakToWidget = () => {
+    if (window && window.Tawk_API) {
+      window.Tawk_API.toggle();
+    }
+    toggleSidebar();
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -77,6 +84,7 @@ const Sidebar = ({ children, pageLocation }) => {
               <div className="navbar-title">MAIN MENU</div>
               <Box mt={5}></Box>
               <NavLink
+                onClick={toggleSidebar}
                 to="/dashboard"
                 className={`navbar-item ${
                   location.pathname === "/dashboard" ? "active-item" : ""
@@ -88,36 +96,40 @@ const Sidebar = ({ children, pageLocation }) => {
               </NavLink>
               <Box mt={5}></Box>
               <NavLink
-                to="/login"
+                onClick={toggleSidebar}
+                to="/transactions"
                 className={`navbar-item ${
                   location.pathname === "/login" ? "active-item" : ""
                 }`}
               >
-                <img src={User} alt="" />
+                <img src={Transactions} alt="" />
                 <Box ml={5}></Box>
-                <p>Users</p>
+                <p>Transactions</p>
               </NavLink>
-              <Box mt={8}></Box>
+              <Box mt={5}></Box>
               <NavLink
-                to="/login"
+                onClick={toggleSidebar}
+                to="/contracts"
                 className={`navbar-item ${
-                  location.pathname === "/login" ? "active-item" : ""
+                  location.pathname === "/contracts" ? "active-item" : ""
                 }`}
               >
-                <img src={Card} alt="" />
+                <img src={Contracts} alt="" />
                 <Box ml={5}></Box>
-                <p>Accounts</p>
+                <p>Contracts</p>
               </NavLink>
-              <Box mt={8}></Box>
+              <Box mt={5}></Box>
               <NavLink
-                to="/login"
+                // onClick={toggleSidebar}
+                // to="/login"
+                onClick={openTwakToWidget}
                 className={`navbar-item ${
                   location.pathname === "/login" ? "active-item" : ""
                 }`}
               >
-                <img src={Chart} alt="" />
+                <img src={Contact} alt="" />
                 <Box ml={5}></Box>
-                <p>Stastics</p>
+                <p>Help</p>
               </NavLink>
               {/* SECTION 2 */}
               <Box mt={10} pt={10}></Box>
@@ -166,6 +178,7 @@ const Sidebar = ({ children, pageLocation }) => {
                 <Box ml={5}></Box>
                 <p>Logout</p>
               </div>
+              <Box mt={10} pt={10}></Box>
             </div>
           </nav>
         </div>

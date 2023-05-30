@@ -1,0 +1,113 @@
+@import url("https://fonts.cdnfonts.com/css/cresing");
+
+.error-cont {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 400px;
+  background-color: black;
+  padding-left: 5%;
+  padding-right: 5%;
+
+  h1 {
+    font-family: "Cresing", sans-serif;
+    font-size: 380px;
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+
+    h2 {
+      font-family: "Cresing", sans-serif;
+      font-size: 80px;
+      position: absolute;
+      bottom: 80px;
+      color: white;
+      right: 30px;
+
+      span {
+        font-family: "Cresing", sans-serif;
+        font-size: 180px;
+        transform: rotate(90deg);
+        -moz-transform: rotate(-10deg);
+      }
+    }
+  }
+
+  p {
+    font-family: "Cresing", sans-serif;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+  }
+
+  a {
+    font-family: "Cresing", sans-serif;
+    width: fit-content;
+    font-size: 20px;
+    background-color: gray;
+    padding: 10px 30px;
+    margin-top: 30px;
+    border-radius: 10px;
+  }
+
+  // Media queries for responsiveness
+  @media screen and (max-width: 768px) {
+    h1 {
+      font-size: 220px;
+    }
+
+    h1 h2 {
+      font-size: 50px;
+      bottom: 50px;
+      right: 15px;
+
+      span {
+        font-size: 120px;
+      }
+    }
+
+    p {
+      font-size: 16px;
+    }
+
+    a {
+      font-size: 16px;
+    }
+  }
+
+  @media screen and (max-width: 664px) {
+    h1 {
+      font-size: 120px;
+    }
+  }
+}
+//   @media screen and (max-width: 480px) {
+//     h1 {
+//       font-size: 180px;
+//       margin-top: 50px;
+//     }
+
+//     h1 h2 {
+//       font-size: 40px;
+//       bottom: 40px;
+//       right: 10px;
+
+//       span {
+//         font-size: 100px;
+//       }
+//     }
+
+//     p {
+//       font-size: 14px;
+//     }
+
+//     a {
+//       font-size: 14px;
+//     }
+//   }
+// }

@@ -149,10 +149,33 @@ export const getUserDate = async (userId, toast) => {
   }
 };
 
+export const fetchRecentTransaction = async (userId, toast) => {
+  try {
+    const response = await post("auth/gettransactions", { id: userId });
+    if (response.success === true) {
+      return response.data;
+    } else {
+      toast({
+        title: "Incorrect Credentials",
+        description: response.message,
+        status: "error",
+      });
+      return [];
+    }
+  } catch (error) {
+    toast({
+      title: "Oops",
+      description: error.message,
+      status: "error",
+    });
+    return [];
+  }
+};
+
 export const generateStatusWithColor = (roleIn, statusIn) => {
   if ((roleIn === "Buyer" || roleIn === "buyer") && statusIn === 0) {
     return {
-      textColor: "#FF3838 ",
+      textColor: "#FF3838",
       bgColor: "#ff383830",
       statusText: "Unpaid",
     };
@@ -182,7 +205,7 @@ export const generateStatusWithColor = (roleIn, statusIn) => {
     };
   } else if ((roleIn === "Seller" || roleIn === "seller") && statusIn === 1) {
     return {
-      textColor: "#FFB302  ",
+      textColor: "#FFB302",
       bgColor: "#ffb30336",
       statusText: "Paid",
     };

@@ -35,7 +35,7 @@
     color: #dcdcdc;
   }
 
-  img {
+  .bg-img {
     position: absolute;
     right: -60px;
     top: 0;
@@ -47,6 +47,7 @@
 }
 
 .current {
+  width: 100%;
   h6 {
     font-style: normal;
     font-weight: 500;
@@ -64,11 +65,29 @@
   }
 }
 
+.tp {
+  background-color: white;
+  border-radius: 20px;
+}
+
+.see-balance-cont {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  img {
+    margin-left: 120px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+}
+
 .pending {
   h6 {
     font-style: normal;
     font-weight: 500;
-    font-size: 15px;
+    font-size: 12px;
     color: #ff6c1a;
     line-height: 10px;
   }
@@ -76,25 +95,47 @@
   h2 {
     font-style: normal;
     font-weight: 500;
-    font-size: 25px;
+    font-size: 20px;
     line-height: 32px;
     color: #ffffff;
   }
 }
 
-.recent-h1 {
+.recent-h1 > h1 {
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
   color: #161616;
 }
+
+.recent-h1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.recent-h1 > a {
+  font-size: 13px;
+  color: #696969;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
 .recent-trac-item-cont {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
 }
 
-.recent-item-cont {
+.recent-trac-item-cont-a {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.recent-item-cont,
+.recent-item-cont-a {
   background-color: white;
   display: flex;
   align-items: center;
@@ -185,12 +226,30 @@
     grid-template-columns: 100%;
     gap: 20px;
   }
+
+  .recent-trac-item-cont-a {
+    display: grid;
+    grid-template-columns: 100%;
+    gap: 20px;
+  }
 }
 
 @media (max-width: 1193px) {
   .welcome-container {
-    img {
+    .bg-img {
       display: none;
+    }
+
+    .wallet-cont {
+      width: 100%;
+    }
+    .see-balance-cont {
+      justify-content: space-between;
+      width: 100%;
+
+      img {
+        margin-left: 0px;
+      }
     }
 
     h1 {
@@ -211,12 +270,22 @@
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
   }
+  .recent-h1 > h1 {
+    font-size: 15px;
+  }
 
+
+  .dc {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+  }
   .status {
     display: none !important;
   }
 
-  .recent-item-cont {
+  .recent-item-cont,
+  .recent-item-cont-a {
     .name-time {
       margin-left: 0px;
 

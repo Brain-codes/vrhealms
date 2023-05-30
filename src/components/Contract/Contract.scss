@@ -5,11 +5,12 @@
   //   height: 60px;
   position: fixed;
   bottom: 2%;
-  right: 2%;
+  left: 20px;
   display: flex;
   padding: 20px;
   justify-content: center;
   align-items: center;
+  z-index: 100;
 }
 
 .contract-tile-cont {

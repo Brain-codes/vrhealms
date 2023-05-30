@@ -20,6 +20,7 @@ import BaseInput from "../Shared/Input/BaseInput";
 import BaseFilledButton from "../Shared/Button/BaseFilledButton";
 import { post } from "../Service/Service";
 import { useToast } from "@chakra-ui/react";
+import { LoadingButton } from "../Shared/Button/LoadingButton";
 
 const CreateContract = ({
   isOpen,
@@ -181,11 +182,20 @@ const CreateContract = ({
             </Flex>
             <Box mt={10} mb={10}></Box>
             <Box mt={10} mb={10}></Box>
-            <BaseFilledButton
-              label="Create Contract"
-              type="submit"
-              onClick={console.log("here")}
-            />
+            {isLoading ? (
+              <>
+                <LoadingButton color="#5c84db" />
+              </>
+            ) : (
+              <>
+                {" "}
+                <BaseFilledButton
+                  label="Create Contract"
+                  type="submit"
+                  onClick={console.log("here")}
+                />
+              </>
+            )}
           </form>
         </ModalBody>
       </ModalContent>

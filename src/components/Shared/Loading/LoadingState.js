@@ -34,3 +34,11 @@ export const ContractLoading = () => {
     </div>
   );
 };
+
+export const RecentLoading = () => {
+  return (
+    <div>
+      <Skeleton height="70px" width="100%" /> <Box pb={2}></Box>
+    </div>
+  );
+};
