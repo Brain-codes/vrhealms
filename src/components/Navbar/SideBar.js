@@ -97,7 +97,7 @@ const Sidebar = ({ children, pageLocation }) => {
               <Box mt={5}></Box>
               <NavLink
                 onClick={toggleSidebar}
-                to="/login"
+                to="/transactions"
                 className={`navbar-item ${
                   location.pathname === "/login" ? "active-item" : ""
                 }`}

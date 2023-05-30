@@ -15,6 +15,9 @@ import {
   getUserDate,
 } from "./Service/DashboardService";
 import { RecentLoading } from "../Shared/Loading/LoadingState";
+import { Link } from "react-router-dom";
+import emptyImage from "../../images/123936-empty-ghost.gif";
+
 const Dashboard = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [contractItem, setContractItem] = useState([]);
@@ -134,7 +137,11 @@ const Dashboard = () => {
       </div>
       <Box pt={10} mt={5}></Box>
       <div className="recent-transaction">
-        <div className="recent-h1">Recent Transaction</div>
+        <div className="recent-h1">
+          <h1>Recent Transaction</h1>
+
+          <Link to="/transactions">see all</Link>
+        </div>
         <Box pt={5}></Box>
         <div className="recent-trac-item-cont">
           {isLoading ? (
@@ -144,21 +151,49 @@ const Dashboard = () => {
             </>
           ) : (
             <>
-              {recentTransactionItem
-                ?.slice(0, 2)
-                .map((eachTransaction, index) => {
-                  const { amount, date, status, type, desc } = eachTransaction;
-                  return (
-                    <RecentItem
-                      key={index} // Make sure to provide a unique key prop for each item in the map
-                      date={date}
-                      amount={amount}
-                      status={status}
-                      type={type}
-                      desc={desc}
-                    />
-                  );
-                })}
+              {recentTransactionItem.length === 0 ? (
+                <div
+                  className={recentTransactionItem.length === 0 ? "tp" : ""}
+                  style={{ padding: "0px 20px" }}
+                >
+                  <div className="empty-cont">
+                    <Box pb={10}></Box>
+                    <img src={emptyImage} alt="JSON Image" />
+                    {recentTransactionItem.length === 0 ? (
+                      <p>
+                        Oops! It looks like you currently don't have any
+                        transaction at the moment.
+                      </p>
+                    ) : (
+                      <p>
+                        {" "}
+                        Oops! It looks like you currently don't have any
+                        transaction at the moment.
+                      </p>
+                    )}
+                    <Box pb={10}></Box>
+                  </div>
+                </div>
+              ) : (
+                <>
+                  {recentTransactionItem
+                    ?.slice(0, 2)
+                    .map((eachTransaction, index) => {
+                      const { amount, date, status, type, desc } =
+                        eachTransaction;
+                      return (
+                        <RecentItem
+                          key={index} // Make sure to provide a unique key prop for each item in the map
+                          date={date}
+                          amount={amount}
+                          status={status}
+                          type={type}
+                          desc={desc}
+                        />
+                      );
+                    })}
+                </>
+              )}
             </>
           )}
         </div>

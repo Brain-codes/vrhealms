@@ -11,6 +11,7 @@ import Layout from "./components/Navbar/Layout";
 import { PaystackHookExample } from "./components/Transactions/TestPay";
 import ContractScreen from "./pages/ContractPage/ContractScreen";
 import ErrorPage from "./pages/404/ErrorPage";
+import TransactionPage from "./pages/TransactionPage/TransactionPage";
 
 function App() {
   return (
@@ -29,7 +30,7 @@ function App() {
                   <Dashboard />
                 </Layout>
               }
-            />{" "}
+            />
             <Route
               path="/contracts"
               element={
@@ -37,16 +38,26 @@ function App() {
                   <ContractScreen />
                 </Layout>
               }
-            />{" "}
+            />
             <Route
-              path="/404"
+              path="/transactions"
               element={
-                <Layout pageLocation="404">
-                  <ErrorPage />
+                <Layout pageLocation="Transactions">
+                  <TransactionPage />
                 </Layout>
               }
-            />{" "}
+            />
             <Route path="/pay" element={<PaystackHookExample />} />
+
+            {/* Wildcard route for 404 errors */}
+            <Route
+              path="*"
+              element={
+                // <Layout pageLocation="404">
+                <ErrorPage />
+                // {/* </Layout> */}
+              }
+            />
           </Routes>
         </Wrapper>
       </Router>

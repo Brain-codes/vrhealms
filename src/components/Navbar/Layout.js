@@ -18,6 +18,8 @@ const Layout = ({ children, pageLocation }) => {
         navigate("/contracts");
       } else if (location.pathname === "/404") {
         navigate("/dashboard");
+      } else if (location.pathname === "/transactions") {
+        navigate("/transactions");
       } else {
         navigate("/404");
       }
