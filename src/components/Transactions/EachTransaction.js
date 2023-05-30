@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import User from "../../images/user-logo.svg";
 import More from "../../images/more-vertical.svg";
 import {
@@ -27,12 +27,10 @@ const EachTransaction = ({
   date,
   status,
   id,
+  textColor,
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { textColor, bgColor, statusText } = generateStatusWithColor(
-    role,
-    status
-  );
+  const { bgColor, statusText } = generateStatusWithColor(role, status);
   const [contractDetailsOpen, setContractDetailsOpen] = useState(false);
 
   const viewContractDetails = () => {
@@ -41,7 +39,17 @@ const EachTransaction = ({
   };
 
   return (
-    <div className="each-transaction-cont">
+    <div
+      className="each-transaction-cont"
+      style={{ borderLeftColor: textColor }}
+    >
+      <style jsx>{`
+        @media (max-width: 510px) {
+          .each-transaction-cont {
+            border-left: 5px solid ${textColor};
+          }
+        }
+      `}</style>
       <div className="img-name">
         <img className="item-image" src={User} alt="" />
         <div className="name-time">
@@ -61,7 +69,7 @@ const EachTransaction = ({
         <p style={{ color: textColor }}>{statusText}</p>
       </div>
       <p className="date">{date}</p>
-      <p className="amount">N{generateFormattedAmount(amount)}</p>
+      <p className="amount">&#8358;{generateFormattedAmount(amount)}</p>
       <div className="details-btn" onClick={viewContractDetails}>
         Details
       </div>
@@ -76,14 +84,6 @@ const EachTransaction = ({
           </MenuList>
         </Menu>
       </div>
-
-      <style jsx>{`
-        @media (max-width: 510px) {
-          .each-transaction-cont {
-            border-left: 5px solid ${textColor};
-          }
-        }
-      `}</style>
       {contractDetailsOpen == true ? (
         <>
           {" "}

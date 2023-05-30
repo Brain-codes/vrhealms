@@ -182,23 +182,39 @@ const ViewContract = ({ isOpen, onClose, id }) => {
                   />
                   <DetailsTile
                     title="Price"
-                    value={`N${generateFormattedAmount(
-                      contractDetailsData?.productPrice ?? 0
-                    )}`}
+                    value={
+                      <>
+                        &#8358;
+                        {generateFormattedAmount(
+                          contractDetailsData?.productPrice ?? 0
+                        )}
+                      </>
+                    }
                   />
+
                   <DetailsTile
                     title="Delivery Price"
-                    value={`N${generateFormattedAmount(
-                      contractDetailsData?.deliveryPrice ?? 0
-                    )}`}
+                    value={
+                      <>
+                        &#8358;
+                        {generateFormattedAmount(
+                          contractDetailsData?.deliveryPrice ?? 0
+                        )}
+                      </>
+                    }
                   />
                 </Flex>
                 <Divider mt={5} mb={7} />
                 <DetailsTile
                   title="Total Price"
-                  value={`N${generateFormattedAmount(
-                    contractDetailsData?.totalPrice ?? 0
-                  )}`}
+                  value={
+                    <>
+                      &#8358;
+                      {generateFormattedAmount(
+                        contractDetailsData?.totalPrice ?? 0
+                      )}
+                    </>
+                  }
                 />
                 <Divider mt={5} mb={7} />
                 <Flex

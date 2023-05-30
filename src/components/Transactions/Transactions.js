@@ -2,13 +2,18 @@ import React, { useEffect, useState } from "react";
 import "./Transactions.scss";
 import Search from "../../images/search.svg";
 import EachTransaction from "./EachTransaction";
-import { generateFormattedDate } from "../Dashboard/Service/DashboardService";
+import { generateFormattedDate, generateStatusWithColor } from "../Dashboard/Service/DashboardService";
 import { TransactionItemLoading } from "../Shared/Loading/LoadingState";
 import { usePaystackPayment } from "react-paystack";
 import { Box } from "@chakra-ui/react";
 import emptyImage from "../../images/123936-empty-ghost.gif";
 
 const Transactions = ({ contractItem, loadingState }) => {
+  const [searchTerm, setSearchTerm] = useState(""); // State for storing the search term
+  const filteredContracts = contractItem.filter((contract) =>
+    contract.productName.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="transactions-whole-cont">
       <div className="top-transc-with-search">
@@ -16,7 +21,12 @@ const Transactions = ({ contractItem, loadingState }) => {
 
         <div className="search-cont">
           <img src={Search} alt="" />
-          <input type="text" placeholder="Search" />
+          <input
+            type="text"
+            placeholder="Search"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
         </div>
       </div>
       {loadingState ? (
@@ -28,23 +38,26 @@ const Transactions = ({ contractItem, loadingState }) => {
         </>
       ) : (
         <>
-          {contractItem.length <= 0 ? (
+          {filteredContracts.length === 0 ? (
             <>
               <div className="empty-cont">
                 <Box pb={10}></Box>
                 <img src={emptyImage} alt="JSON Image" />
-                {/* <Box pb={10}></Box> */}
-                <p>
-                  Oops! It looks like you currently don't have any contract at
-                  the moment{" "}
-                </p>
+                {contractItem.length === 0 ? (
+                  <p>
+                    Oops! It looks like you currently don't have any contract at
+                    the moment.
+                  </p>
+                ) : (
+                  <p>Oops! No contracts match your search.</p>
+                )}
                 <Box pb={10}></Box>
               </div>
             </>
           ) : (
             <>
               {" "}
-              {contractItem?.map((eachContract, index) => {
+              {filteredContracts.map((eachContract, index) => {
                 const {
                   recipientName,
                   invoiceRole,
@@ -55,6 +68,10 @@ const Transactions = ({ contractItem, loadingState }) => {
                   totalPrice,
                   title,
                 } = eachContract;
+                const { textColor } = generateStatusWithColor(
+                  invoiceRole,
+                  contractStatus
+                );
                 return (
                   <EachTransaction
                     key={contractId}
@@ -65,6 +82,7 @@ const Transactions = ({ contractItem, loadingState }) => {
                     date={generateFormattedDate(createdAt)}
                     status={contractStatus}
                     id={contractId}
+                    textColor={textColor} // Pass the textColor as a prop
                   />
                 );
               })}
@@ -72,9 +90,6 @@ const Transactions = ({ contractItem, loadingState }) => {
           )}
         </>
       )}
-
-      {/* <EachTransaction />
-      <EachTransaction /> */}
     </div>
   );
 };
